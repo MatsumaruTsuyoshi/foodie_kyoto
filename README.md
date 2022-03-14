@@ -30,6 +30,7 @@ GoogleMap等で立地、雰囲気、料金、レビュー、を鑑みてお店�
 ### 運営者
 
 https://github.com/MatsumaruTsuyoshi
+
 https://github.com/nasubibocchi
 
 ### 運営期間
