@@ -62,6 +62,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   init() async {
     _packageInfo = await PackageInfo.fromPlatform();
+    setState(() {});
   }
 
   @override
