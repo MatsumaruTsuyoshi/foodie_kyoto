@@ -31,3 +31,9 @@ Runner/GeneratedPluginRegistrant.*
 !default.mode2v3
 !default.pbxuser
 !default.perspectivev3
+
+#xcconfig
+Flutter/DartDefines.xcconfig
+
+#firebase
+**/GoogleService-Info.plist
