@@ -29,8 +29,10 @@ GoogleMap等で立地、雰囲気、料金、レビュー、を鑑みてお店�
 
 ### 運営者
 
-https://github.com/MatsumaruTsuyoshi
-https://github.com/nasubibocchi
+[MatsumaruTsuyoshi](https://github.com/MatsumaruTsuyoshi)
+
+[nasubibocchi](https://github.com/nasubibocchi)
+
 
 ### 運営期間
 
@@ -47,3 +49,13 @@ https://github.com/nasubibocchi
 
 ### 環境構築
 fvm install
+
+### 状態管理
+riverpod + freezed
+
+### 画面遷移
+go_router
+
+### CI/CD
+GithubActions/Codemagic
+
