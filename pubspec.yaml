@@ -18,11 +18,36 @@ dependencies:
 
   cupertino_icons: ^1.0.2
 
+  # DI
+  flutter_hooks: ^0.18.2+1
+  hooks_riverpod: ^1.0.3
+
+  # Firebase
+  firebase_core: ^1.13.1
+  cloud_firestore: ^3.1.10
+
+  # Model
+  freezed_annotation: ^1.1.0
+
+  # Routing
+  go_router: ^3.0.5
+
+  # Permission
+  permission_handler: ^9.2.0
+
 dev_dependencies:
+  # Test
   flutter_test:
     sdk: flutter
 
+  # Lint
   flutter_lints: ^1.0.0
+
+  build_runner: ^2.1.8
+
+  # Model
+  freezed: ^1.1.1
+  json_serializable: ^6.1.5
 
 flutter:
 
