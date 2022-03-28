@@ -35,6 +35,9 @@ dependencies:
   # Permission
   permission_handler: ^9.2.0
 
+  # Map
+  google_maps_flutter: ^2.1.3
+
 dev_dependencies:
   # Test
   flutter_test:
