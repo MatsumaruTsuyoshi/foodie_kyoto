@@ -51,6 +51,10 @@ GoogleMap等で立地、雰囲気、料金、レビュー、を鑑みてお店�
 ### 環境構築
 fvm install
 
+.env追加
+
+Firegbaseのファイル追加
+
 ### 状態管理
 riverpod + freezed
 
