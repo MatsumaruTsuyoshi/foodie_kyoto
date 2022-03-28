@@ -60,3 +60,8 @@ go_router
 ### CI/CD
 GithubActions/Codemagic
 
+## 開発の進め方
+- developブランチに移動
+- git pull origin developで最新のdevelopを取り込む
+- タスクのブランチを切る
+- 編集してdevelopへプルリクエスト
