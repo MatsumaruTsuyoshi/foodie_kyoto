@@ -32,6 +32,12 @@ if (project.hasProperty('dart-defines')) {
             }
 }
 
+// .envの読み込み
+def envProps = new Properties()
+new File('../.env').withReader('UTF-8') {
+    envProps.load(it)
+}
+
 task selectGoogleServicesJson(type: Copy) {
     from "src/${dartEnvironmentVariables.FLAVOR}/google-services.json"
     into './'
@@ -76,6 +82,8 @@ android {
         }
         resValue "string", "app_name", "FlutterAT" +
                 (dartEnvironmentVariables.FLAVOR == 'prod' ? '' : ".${dartEnvironmentVariables.FLAVOR}")
+        // マニフェストにビルド変数を追加する
+        manifestPlaceholders = ["MAP_API_KEY_Android":envProps.MAP_API_KEY_Android]
     }
 
     buildTypes {
