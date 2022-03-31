@@ -28,7 +28,10 @@ class HomePage extends HookConsumerWidget {
           BottomNavigationBarItem(icon: Icon(Icons.list_rounded), label: ''),
         ],
       ),
-      body: _pages.elementAt(_currentIndex),
+      body: IndexedStack(
+        index: _currentIndex,
+        children: _pages,
+      ),
     );
   }
 }
