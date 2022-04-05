@@ -11,7 +11,7 @@ class ShopDataSourceImpl implements ShopDataSource {
       {required int limit, QueryDocumentSnapshot? cursor}) async {
     final ref = firestore.collection('shops');
     if (cursor == null) {
-      final query = ref.orderBy('created_at').limit(limit);
+      final query = ref.orderBy('created_at', descending: true).limit(limit);
 
       try {
         final snapshot = await query.get();
@@ -22,8 +22,10 @@ class ShopDataSourceImpl implements ShopDataSource {
         return Error(e);
       }
     } else {
-      final query =
-          ref.orderBy('created_at').startAfterDocument(cursor).limit(limit);
+      final query = ref
+          .orderBy('created_at', descending: true)
+          .startAfterDocument(cursor)
+          .limit(limit);
 
       try {
         final snapshot = await query.get();
