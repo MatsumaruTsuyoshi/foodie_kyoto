@@ -38,6 +38,9 @@ dependencies:
   # Map
   google_maps_flutter: ^2.1.3
 
+  # Test
+  mockito: ^5.1.0
+
 dev_dependencies:
   # Test
   flutter_test:
