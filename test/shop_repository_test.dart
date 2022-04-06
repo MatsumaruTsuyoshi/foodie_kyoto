@@ -53,11 +53,7 @@ void main() {
       final shopResult = await model.fetchShops(limit: 10);
 
       // ShopModel -> Shop の変換確認
-      expect(
-        shopResult,
-        isA<Success<List<Shop>>>()
-            .having((result) => result, 'isNotNull', isNotNull),
-      );
+      expect(shopResult, isA<Success<List<Shop>>>());
     });
   });
 }
