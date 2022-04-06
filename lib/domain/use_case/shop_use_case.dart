@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:foodie_kyoto/data/repository/result.dart';
 import 'package:foodie_kyoto/domain/entity/shop.dart';
 import 'package:foodie_kyoto/domain/repository/shop_repository.dart';
@@ -15,7 +14,6 @@ class ShopUseCase extends ShopRepository {
   final ShopRepository _repository;
 
   @override
-  Future<Result<List<Shop>>> fetchShops(
-          {required int limit, QueryDocumentSnapshot? cursor}) =>
+  Future<Result<List<Shop>>> fetchShops({required int limit, int? cursor}) =>
       _repository.fetchShops(limit: limit, cursor: cursor);
 }

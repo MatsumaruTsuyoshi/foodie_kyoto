@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:foodie_kyoto/data/remote/data_source/shop_data_source.dart';
 import 'package:foodie_kyoto/data/repository/result.dart';
 import 'package:foodie_kyoto/domain/entity/shop.dart';
@@ -12,7 +11,7 @@ class ShopRepositoryImpl implements ShopRepository {
 
   @override
   Future<Result<List<Shop>>> fetchShops(
-      {required int limit, QueryDocumentSnapshot? cursor}) async {
+      {required int limit, int? cursor}) async {
     final appShopList =
         await _dataSource.fetchShops(limit: limit, cursor: cursor);
 

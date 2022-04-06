@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:foodie_kyoto/data/remote/data_source/shop_data_source.dart';
 import 'package:foodie_kyoto/data/repository/result.dart';
 import 'package:foodie_kyoto/data/repository/shop_repository_impl.dart';
@@ -9,6 +8,5 @@ final shopRepositoryProvider = Provider(
     (ref) => ShopRepositoryImpl(dataSource: ref.read(shopDataSourceProvider)));
 
 abstract class ShopRepository {
-  Future<Result<List<Shop>>> fetchShops(
-      {required int limit, QueryDocumentSnapshot? cursor});
+  Future<Result<List<Shop>>> fetchShops({required int limit, int? cursor});
 }

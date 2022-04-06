@@ -10,7 +10,7 @@ class ShopDataSourceImpl implements ShopDataSource {
 
   @override
   Future<Result<List<ShopModel>>> fetchShops(
-      {required int limit, QueryDocumentSnapshot? cursor}) async {
+      {required int limit, int? cursor}) async {
     final ref = _firestore.collection('shops');
     if (cursor == null) {
       final query = ref.orderBy('created_at', descending: true).limit(limit);
@@ -26,8 +26,7 @@ class ShopDataSourceImpl implements ShopDataSource {
     } else {
       final query = ref
           .orderBy('created_at', descending: true)
-          .startAfterDocument(cursor)
-          .limit(limit);
+          .startAt([cursor]).limit(limit);
 
       try {
         final snapshot = await query.get();
