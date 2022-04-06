@@ -9,7 +9,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
-import 'shop_data_repository_test.mocks.dart';
+import 'shop_repository_test.mocks.dart';
 
 @GenerateMocks([ShopDataSource])
 void main() {
