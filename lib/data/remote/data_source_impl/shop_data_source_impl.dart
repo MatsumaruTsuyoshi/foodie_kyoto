@@ -4,12 +4,14 @@ import 'package:foodie_kyoto/data/remote/data_source/shop_data_source.dart';
 import 'package:foodie_kyoto/data/repository/result.dart';
 
 class ShopDataSourceImpl implements ShopDataSource {
-  final firestore = FirebaseFirestore.instance;
+  ShopDataSourceImpl({required FirebaseFirestore firestore})
+      : _firestore = firestore;
+  final FirebaseFirestore _firestore;
 
   @override
   Future<Result<List<ShopModel>>> fetchShops(
       {required int limit, QueryDocumentSnapshot? cursor}) async {
-    final ref = firestore.collection('shops');
+    final ref = _firestore.collection('shops');
     if (cursor == null) {
       final query = ref.orderBy('created_at', descending: true).limit(limit);
 
