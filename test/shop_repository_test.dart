@@ -54,6 +54,10 @@ void main() {
 
       // ShopModel -> Shop の変換確認
       expect(shopResult, isA<Success<List<Shop>>>());
+
+      // dataの中身を確認
+      shopResult.whenWithResult(
+          (list) => expect(list.value.first.name, 'name_1'), (e) => e);
     });
   });
 }
