@@ -1,5 +1,4 @@
 import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:foodie_kyoto/data/model/shop_model.dart';
 import 'package:foodie_kyoto/data/remote/data_source/shop_data_source.dart';
@@ -58,7 +57,6 @@ Future<void> main() async {
               .orderBy('shop_id', descending: false)
               .limit(10)
               .get();
-          debugPrint('data = ${snapshot.docs.first.data()['name']}');
           return Success(snapshot);
         } on Exception catch (e) {
           return Error(e);
