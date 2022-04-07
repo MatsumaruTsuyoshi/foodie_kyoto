@@ -4,7 +4,7 @@ import 'package:foodie_kyoto/data/repository/shop_repository_impl.dart';
 import 'package:foodie_kyoto/domain/entity/shop.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final shopRepositoryProvider = Provider(
+final shopRepositoryProvider = Provider<ShopRepositoryImpl>(
     (ref) => ShopRepositoryImpl(dataSource: ref.read(shopDataSourceProvider)));
 
 abstract class ShopRepository {

@@ -4,7 +4,7 @@ import 'package:foodie_kyoto/data/remote/firestore_provider.dart';
 import 'package:foodie_kyoto/data/repository/result.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final shopDataSourceProvider = Provider(
+final shopDataSourceProvider = Provider<ShopDataSourceImpl>(
     (ref) => ShopDataSourceImpl(firestore: ref.read(firestoreProvider)));
 
 abstract class ShopDataSource {

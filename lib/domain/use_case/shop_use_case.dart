@@ -5,7 +5,7 @@ import 'dart:async';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final shopUseCaseProvider = Provider(
+final shopUseCaseProvider = Provider<ShopUseCase>(
     (ref) => ShopUseCase(repository: ref.read(shopRepositoryProvider)));
 
 class ShopUseCase extends ShopRepository {
