@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:foodie_kyoto/data/remote/firestore_provider.dart';
-import 'package:foodie_kyoto/data/repository/result.dart';
+import 'package:foodie_kyoto/data/model/result.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final shopFirestoreProvider = Provider<ShopFirestore>(

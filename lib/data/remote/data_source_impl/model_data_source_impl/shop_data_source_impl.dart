@@ -1,7 +1,7 @@
 import 'package:foodie_kyoto/data/model/shop_model.dart';
 import 'package:foodie_kyoto/data/remote/data_source/shop_data_source.dart';
 import 'package:foodie_kyoto/data/remote/data_source_impl/firestore_data_source/shop_firestore.dart';
-import 'package:foodie_kyoto/data/repository/result.dart';
+import 'package:foodie_kyoto/data/model/result.dart';
 
 class ShopDataSourceImpl implements ShopDataSource {
   ShopDataSourceImpl({required ShopFirestore shopFirestore})

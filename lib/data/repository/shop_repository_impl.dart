@@ -1,5 +1,5 @@
 import 'package:foodie_kyoto/data/remote/data_source/shop_data_source.dart';
-import 'package:foodie_kyoto/data/repository/result.dart';
+import 'package:foodie_kyoto/data/model/result.dart';
 import 'package:foodie_kyoto/domain/entity/shop.dart';
 import 'package:foodie_kyoto/domain/repository/shop_repository.dart';
 import 'dart:async';

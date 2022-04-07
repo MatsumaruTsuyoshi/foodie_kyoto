@@ -4,7 +4,7 @@ import 'package:foodie_kyoto/data/model/shop_model.dart';
 import 'package:foodie_kyoto/data/remote/data_source/shop_data_source.dart';
 import 'package:foodie_kyoto/data/remote/data_source_impl/firestore_data_source/shop_firestore.dart';
 import 'package:foodie_kyoto/data/remote/data_source_impl/model_data_source_impl/shop_data_source_impl.dart';
-import 'package:foodie_kyoto/data/repository/result.dart';
+import 'package:foodie_kyoto/data/model/result.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
