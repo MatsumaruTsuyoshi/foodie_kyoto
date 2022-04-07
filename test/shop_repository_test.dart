@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:foodie_kyoto/data/model/shop_model.dart';
 import 'package:foodie_kyoto/data/remote/data_source/shop_data_source.dart';
-import 'package:foodie_kyoto/data/repository/result.dart';
+import 'package:foodie_kyoto/data/model/result.dart';
 import 'package:foodie_kyoto/data/repository/shop_repository_impl.dart';
 import 'package:foodie_kyoto/domain/entity/shop.dart';
 import 'package:foodie_kyoto/domain/repository/shop_repository.dart';
@@ -19,14 +19,14 @@ void main() {
     _shopDataSource = MockShopDataSource();
   });
 
+  final container = ProviderContainer(overrides: [
+    shopRepositoryProvider.overrideWithProvider(
+        Provider((ref) => ShopRepositoryImpl(dataSource: _shopDataSource)))
+  ]);
+
   group('fetch shops', () {
     test('shop repository can correctly change data type shop_model to shop',
         () async {
-      final container = ProviderContainer(overrides: [
-        shopRepositoryProvider.overrideWithProvider(
-            Provider((ref) => ShopRepositoryImpl(dataSource: _shopDataSource)))
-      ]);
-
       final List<Map<String, dynamic>> data = [
         {
           'name': 'name_1',
@@ -57,7 +57,9 @@ void main() {
 
       // dataの中身を確認
       shopResult.whenWithResult(
-          (list) => expect(list.value.first.name, 'name_1'), (e) => e);
+        (list) => expect(list.value.first.name, 'name_1'),
+        (e) => expect(e, null),
+      );
     });
   });
 }
