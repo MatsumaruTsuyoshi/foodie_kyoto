@@ -32,7 +32,7 @@ class MockShopDataSource extends _i1.Mock implements _i3.ShopDataSource {
 
   @override
   _i4.Future<_i2.Result<List<_i5.ShopModel>>> fetchShops(
-          {int? limit, int? cursor}) =>
+          {int? limit, String? cursor}) =>
       (super.noSuchMethod(
           Invocation.method(#fetchShops, [], {#limit: limit, #cursor: cursor}),
           returnValue: Future<_i2.Result<List<_i5.ShopModel>>>.value(

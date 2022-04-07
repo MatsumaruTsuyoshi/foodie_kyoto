@@ -8,5 +8,5 @@ final shopRepositoryProvider = Provider<ShopRepositoryImpl>(
     (ref) => ShopRepositoryImpl(dataSource: ref.read(shopDataSourceProvider)));
 
 abstract class ShopRepository {
-  Future<Result<List<Shop>>> fetchShops({required int limit, int? cursor});
+  Future<Result<List<Shop>>> fetchShops({required int limit, String? cursor});
 }

@@ -14,6 +14,6 @@ class ShopUseCase extends ShopRepository {
   final ShopRepository _repository;
 
   @override
-  Future<Result<List<Shop>>> fetchShops({required int limit, int? cursor}) =>
+  Future<Result<List<Shop>>> fetchShops({required int limit, String? cursor}) =>
       _repository.fetchShops(limit: limit, cursor: cursor);
 }

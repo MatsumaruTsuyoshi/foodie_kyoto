@@ -11,7 +11,7 @@ class ShopRepositoryImpl implements ShopRepository {
 
   @override
   Future<Result<List<Shop>>> fetchShops(
-      {required int limit, int? cursor}) async {
+      {required int limit, String? cursor}) async {
     final appShopList =
         await _dataSource.fetchShops(limit: limit, cursor: cursor);
 
