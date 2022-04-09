@@ -6,7 +6,11 @@ void main() {
   late HomePageViewModel onTapItems;
 
   setUp(() {
-    final container = ProviderContainer();
+    final container = ProviderContainer(overrides: [
+      homePageViewModelProvider.overrideWithProvider(
+          StateNotifierProvider<HomePageViewModel, HomePageState>(
+              (ref) => HomePageViewModel())),
+    ]);
     onTapItems = container.read(homePageViewModelProvider.notifier);
   });
 
