@@ -25,7 +25,7 @@ void main() {
       //状態確認
       expect(onTapItems.debugState.currentIndex, 1);
 
-      //tap map oage
+      //tap map page
       onTapItems.onTapItems(0);
 
       //状態確認
