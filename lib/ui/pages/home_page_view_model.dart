@@ -4,7 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 part 'home_page_view_model.freezed.dart';
 
 final homePageViewModelProvider =
-    StateNotifierProvider.autoDispose<HomePageViewModel, HomePageState>(
+    StateNotifierProvider<HomePageViewModel, HomePageState>(
         (ref) => HomePageViewModel());
 
 @freezed

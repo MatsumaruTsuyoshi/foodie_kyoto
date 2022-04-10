@@ -6,7 +6,11 @@ void main() {
   late HomePageViewModel onTapItems;
 
   setUp(() {
-    final container = ProviderContainer();
+    final container = ProviderContainer(overrides: [
+      homePageViewModelProvider.overrideWithProvider(
+          StateNotifierProvider<HomePageViewModel, HomePageState>(
+              (ref) => HomePageViewModel())),
+    ]);
     onTapItems = container.read(homePageViewModelProvider.notifier);
   });
 
@@ -21,7 +25,7 @@ void main() {
       //状態確認
       expect(onTapItems.debugState.currentIndex, 1);
 
-      //tap map oage
+      //tap map page
       onTapItems.onTapItems(0);
 
       //状態確認
