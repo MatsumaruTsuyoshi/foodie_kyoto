@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -15,7 +14,7 @@ class GoogleMapState with _$GoogleMapState {
 }
 
 class GoogleMapPageController extends StateNotifier<GoogleMapState> {
-  GoogleMapPageController() : super(GoogleMapState());
+  GoogleMapPageController() : super(GoogleMapState.creating());
 
   void onMapCreated(controller) async {
     state = GoogleMapState(googleMapController: controller);
