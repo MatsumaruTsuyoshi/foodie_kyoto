@@ -25,9 +25,7 @@ class GoogleMapPage extends HookConsumerWidget {
       body: GoogleMap(
         mapType: MapType.normal,
         initialCameraPosition: _kGooglePlex,
-        onMapCreated: (GoogleMapController controller) {
-          ref.read(googleMapProvider.notifier).onMapCreated(controller);
-        },
+        onMapCreated: ref.read(googleMapProvider.notifier).onMapCreated,
       ),
       floatingActionButton: state.when(
           (googleMapController) => FloatingActionButton.extended(
