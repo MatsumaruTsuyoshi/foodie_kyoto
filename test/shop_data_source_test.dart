@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:foodie_kyoto/data/model/shop_model.dart';
@@ -29,9 +30,17 @@ Future<void> main() async {
     <String, dynamic>{
       'name': 'name_1',
       'shop_id': 'shop_id_1',
+      'position': {
+        'geohash': 'xn0x1ktq9',
+        'geopoint': const GeoPoint(35.006323, 135.765321),
+      },
       'comment': 'comment_1',
       'images': ['image1', 'image2'],
-      'tags': [1, 3],
+      'service_tags': [1, 2],
+      'area_tags': [3, 4],
+      'food_tags': [5, 6],
+      'post_user': 'user1',
+      'price': 3000,
       'created_at': DateTime(2020, 1, 1),
     },
   );
@@ -40,9 +49,17 @@ Future<void> main() async {
     <String, dynamic>{
       'name': 'name_2',
       'shop_id': 'shop_id_2',
+      'position': {
+        'geohash': 'xn0x1ktq9',
+        'geopoint': const GeoPoint(35.006323, 135.765321),
+      },
       'comment': 'comment_2',
       'images': ['image1', 'image2'],
-      'tags': [2, 4],
+      'service_tags': [1, 2],
+      'area_tags': [3, 4],
+      'food_tags': [5, 6],
+      'post_user': 'user1',
+      'price': 1000,
       'created_at': DateTime.now(),
     },
   );
