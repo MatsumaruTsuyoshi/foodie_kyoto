@@ -8,7 +8,10 @@ import 'package:foodie_kyoto/data/model/result.dart' as _i2;
 import 'package:foodie_kyoto/data/model/shop_model.dart' as _i5;
 import 'package:foodie_kyoto/data/remote/data_source/shop_data_source.dart'
     as _i3;
+import 'package:foodie_kyoto/data/remote/data_source_impl/model_data_source_impl/shop_data_source_impl.dart'
+    as _i7;
 import 'package:mockito/mockito.dart' as _i1;
+import 'package:rxdart/rxdart.dart' as _i6;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -39,6 +42,12 @@ class MockShopDataSource extends _i1.Mock implements _i3.ShopDataSource {
               #shopDataSourceStreamController, _shopDataSourceStreamController),
           returnValueForMissingStub: null);
   @override
+  set shopDataSourceRadius(
+          _i6.BehaviorSubject<dynamic>? _shopDataSourceRadius) =>
+      super.noSuchMethod(
+          Invocation.setter(#shopDataSourceRadius, _shopDataSourceRadius),
+          returnValueForMissingStub: null);
+  @override
   _i4.Future<_i2.Result<List<_i5.ShopModel>>> fetchShops(
           {int? limit, String? cursor}) =>
       (super.noSuchMethod(
@@ -67,6 +76,75 @@ class MockShopDataSource extends _i1.Mock implements _i3.ShopDataSource {
                 #areaTags: areaTags,
                 #foodTags: foodTags
               }),
+              returnValue:
+                  Future<_i2.Result<String>>.value(_FakeResult_0<String>()))
+          as _i4.Future<_i2.Result<String>>);
+  @override
+  _i4.Future<_i2.Result<String>> onChangeMapRadius({double? dx}) =>
+      (super.noSuchMethod(Invocation.method(#onChangeMapRadius, [], {#dx: dx}),
+              returnValue:
+                  Future<_i2.Result<String>>.value(_FakeResult_0<String>()))
+          as _i4.Future<_i2.Result<String>>);
+}
+
+/// A class which mocks [ShopDataSourceImpl].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockShopDataSourceImpl extends _i1.Mock
+    implements _i7.ShopDataSourceImpl {
+  MockShopDataSourceImpl() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  set shopDataSourceStreamController(
+          _i4.StreamController<_i4.Stream<List<_i5.ShopModel>>>?
+              _shopDataSourceStreamController) =>
+      super.noSuchMethod(
+          Invocation.setter(
+              #shopDataSourceStreamController, _shopDataSourceStreamController),
+          returnValueForMissingStub: null);
+  @override
+  set shopDataSourceRadius(
+          _i6.BehaviorSubject<dynamic>? _shopDataSourceRadius) =>
+      super.noSuchMethod(
+          Invocation.setter(#shopDataSourceRadius, _shopDataSourceRadius),
+          returnValueForMissingStub: null);
+  @override
+  _i4.Future<_i2.Result<List<_i5.ShopModel>>> fetchShops(
+          {int? limit, String? cursor}) =>
+      (super.noSuchMethod(
+          Invocation.method(#fetchShops, [], {#limit: limit, #cursor: cursor}),
+          returnValue: Future<_i2.Result<List<_i5.ShopModel>>>.value(
+              _FakeResult_0<List<_i5.ShopModel>>())) as _i4
+          .Future<_i2.Result<List<_i5.ShopModel>>>);
+  @override
+  _i4.Future<_i2.Result<String>> fetchFilteredShops(
+          {double? latitude,
+          double? longitude,
+          double? radius,
+          int? minPrice,
+          int? maxPrice,
+          List<int>? serviceTags,
+          List<int>? areaTags,
+          List<int>? foodTags}) =>
+      (super.noSuchMethod(
+              Invocation.method(#fetchFilteredShops, [], {
+                #latitude: latitude,
+                #longitude: longitude,
+                #radius: radius,
+                #minPrice: minPrice,
+                #maxPrice: maxPrice,
+                #serviceTags: serviceTags,
+                #areaTags: areaTags,
+                #foodTags: foodTags
+              }),
+              returnValue:
+                  Future<_i2.Result<String>>.value(_FakeResult_0<String>()))
+          as _i4.Future<_i2.Result<String>>);
+  @override
+  _i4.Future<_i2.Result<String>> onChangeMapRadius({double? dx}) =>
+      (super.noSuchMethod(Invocation.method(#onChangeMapRadius, [], {#dx: dx}),
               returnValue:
                   Future<_i2.Result<String>>.value(_FakeResult_0<String>()))
           as _i4.Future<_i2.Result<String>>);

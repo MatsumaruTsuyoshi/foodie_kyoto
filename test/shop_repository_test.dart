@@ -3,6 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:foodie_kyoto/data/model/shop_model.dart';
 import 'package:foodie_kyoto/data/remote/data_source/shop_data_source.dart';
 import 'package:foodie_kyoto/data/model/result.dart';
+import 'package:foodie_kyoto/data/remote/data_source_impl/model_data_source_impl/shop_data_source_impl.dart';
 import 'package:foodie_kyoto/data/repository/shop_repository_impl.dart';
 import 'package:foodie_kyoto/domain/entity/shop.dart';
 import 'package:foodie_kyoto/domain/repository/shop_repository.dart';
@@ -12,11 +13,11 @@ import 'package:mockito/mockito.dart';
 
 import 'shop_repository_test.mocks.dart';
 
-@GenerateMocks([ShopDataSource])
+@GenerateMocks([ShopDataSource, ShopDataSourceImpl])
 void main() {
   late MockShopDataSource _shopDataSource;
 
-  setUp(() {
+  setUpAll(() {
     _shopDataSource = MockShopDataSource();
   });
 
