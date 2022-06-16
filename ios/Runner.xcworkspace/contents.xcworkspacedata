@@ -2,9 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Users/matsumarutsuyoshi/AndroidStudioProjects/foodie_kyoto/ios/GoogleService-Info.plist">
-   </FileRef>
-   <FileRef
       location = "group:GoogleService-Info.plist">
    </FileRef>
    <FileRef
