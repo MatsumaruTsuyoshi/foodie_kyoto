@@ -4,11 +4,12 @@
 
 import 'dart:async' as _i2;
 
-import 'package:cloud_firestore/cloud_firestore.dart' as _i5;
-import 'package:foodie_kyoto/data/model/result.dart' as _i3;
+import 'package:cloud_firestore/cloud_firestore.dart' as _i6;
+import 'package:foodie_kyoto/data/model/result.dart' as _i4;
 import 'package:foodie_kyoto/data/remote/data_source_impl/firestore_data_source/shop_firestore.dart'
-    as _i4;
+    as _i5;
 import 'package:mockito/mockito.dart' as _i1;
+import 'package:rxdart/rxdart.dart' as _i3;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -23,36 +24,49 @@ import 'package:mockito/mockito.dart' as _i1;
 class _FakeStreamController_0<T> extends _i1.Fake
     implements _i2.StreamController<T> {}
 
-class _FakeResult_1<T> extends _i1.Fake implements _i3.Result<T> {}
+class _FakeBehaviorSubject_1<T> extends _i1.Fake
+    implements _i3.BehaviorSubject<T> {}
+
+class _FakeResult_2<T> extends _i1.Fake implements _i4.Result<T> {}
 
 /// A class which mocks [ShopFirestore].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockShopFirestore extends _i1.Mock implements _i4.ShopFirestore {
+class MockShopFirestore extends _i1.Mock implements _i5.ShopFirestore {
   MockShopFirestore() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
   _i2.StreamController<
-          _i2.Stream<List<_i5.DocumentSnapshot<Map<String, Object?>>>>>
+          _i2.Stream<List<_i6.DocumentSnapshot<Map<String, Object?>>>>>
       get shopFirestoreStreamController => (super.noSuchMethod(
               Invocation.getter(#shopFirestoreStreamController),
               returnValue: _FakeStreamController_0<
-                  _i2.Stream<List<_i5.DocumentSnapshot<Map<String, Object?>>>>>())
+                  _i2.Stream<List<_i6.DocumentSnapshot<Map<String, Object?>>>>>())
           as _i2.StreamController<
-              _i2.Stream<List<_i5.DocumentSnapshot<Map<String, Object?>>>>>);
+              _i2.Stream<List<_i6.DocumentSnapshot<Map<String, Object?>>>>>);
   @override
-  _i2.Future<_i3.Result<_i5.QuerySnapshot<Map<String, dynamic>>>> fetchShops(
+  _i3.BehaviorSubject<dynamic> get shopFirestoreRadius =>
+      (super.noSuchMethod(Invocation.getter(#shopFirestoreRadius),
+              returnValue: _FakeBehaviorSubject_1<dynamic>())
+          as _i3.BehaviorSubject<dynamic>);
+  @override
+  set shopFirestoreRadius(_i3.BehaviorSubject<dynamic>? _shopFirestoreRadius) =>
+      super.noSuchMethod(
+          Invocation.setter(#shopFirestoreRadius, _shopFirestoreRadius),
+          returnValueForMissingStub: null);
+  @override
+  _i2.Future<_i4.Result<_i6.QuerySnapshot<Map<String, dynamic>>>> fetchShops(
           {int? limit, String? cursor}) =>
       (super.noSuchMethod(
           Invocation.method(#fetchShops, [], {#limit: limit, #cursor: cursor}),
           returnValue: Future<
-                  _i3.Result<_i5.QuerySnapshot<Map<String, dynamic>>>>.value(
-              _FakeResult_1<_i5.QuerySnapshot<Map<String, dynamic>>>())) as _i2
-          .Future<_i3.Result<_i5.QuerySnapshot<Map<String, dynamic>>>>);
+                  _i4.Result<_i6.QuerySnapshot<Map<String, dynamic>>>>.value(
+              _FakeResult_2<_i6.QuerySnapshot<Map<String, dynamic>>>())) as _i2
+          .Future<_i4.Result<_i6.QuerySnapshot<Map<String, dynamic>>>>);
   @override
-  _i2.Future<_i3.Result<String>> fetchFilteredShops(
+  _i2.Future<_i4.Result<String>> fetchFilteredShops(
           {double? latitude,
           double? longitude,
           double? radius,
@@ -73,6 +87,12 @@ class MockShopFirestore extends _i1.Mock implements _i4.ShopFirestore {
                 #foodTags: foodTags
               }),
               returnValue:
-                  Future<_i3.Result<String>>.value(_FakeResult_1<String>()))
-          as _i2.Future<_i3.Result<String>>);
+                  Future<_i4.Result<String>>.value(_FakeResult_2<String>()))
+          as _i2.Future<_i4.Result<String>>);
+  @override
+  _i2.Future<_i4.Result<String>> onChangeMapRadius({double? dx}) =>
+      (super.noSuchMethod(Invocation.method(#onChangeMapRadius, [], {#dx: dx}),
+              returnValue:
+                  Future<_i4.Result<String>>.value(_FakeResult_2<String>()))
+          as _i2.Future<_i4.Result<String>>);
 }

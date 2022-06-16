@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:foodie_kyoto/data/model/shop_model.dart';
 import 'package:foodie_kyoto/data/remote/data_source/shop_data_source.dart';
@@ -115,6 +116,23 @@ Future<void> main() async {
       result.whenWithResult(
         (list) => expect(list.value.length, 1),
         (e) => expect(e, Exception('Unhendled part, could be anything')),
+      );
+    });
+  });
+
+  group('radius', () {
+    test('when search radius changes', () async {
+      when(_shopFirestore.onChangeMapRadius(dx: 0.1)).thenAnswer((_) async {
+        _shopFirestore.shopFirestoreRadius.add(0.1);
+        return Success('SUCCESS');
+      });
+
+      final model = container.read(shopDataSourceProvider);
+      final result = await model.onChangeMapRadius(dx: 0.1);
+
+      result.whenWithResult(
+        (success) => expect(success.value, 'SUCCESS'),
+        (e) => debugPrint('the test is not passed'),
       );
     });
   });
