@@ -4,6 +4,7 @@ import 'package:foodie_kyoto/data/model/shop_model.dart';
 import 'package:foodie_kyoto/data/remote/data_source/shop_data_source.dart';
 import 'package:foodie_kyoto/data/remote/data_source_impl/firestore_data_source/shop_firestore.dart';
 import 'package:foodie_kyoto/data/model/result.dart';
+import 'package:rxdart/rxdart.dart';
 
 class ShopDataSourceImpl implements ShopDataSource {
   ShopDataSourceImpl({required ShopFirestore shopFirestore})
@@ -21,6 +22,15 @@ class ShopDataSourceImpl implements ShopDataSource {
           StreamController<Stream<List<ShopModel>>>?
               _shopDataSourceStreamController) =>
       _shopDataSourceStreamController;
+
+  @override
+  get shopDataSourceRadius => _shopDataSourceRadius;
+
+  BehaviorSubject _shopDataSourceRadius = BehaviorSubject<double>.seeded(1.0);
+
+  @override
+  set shopDataSourceRadius(BehaviorSubject? _shopDataSourceRadius) =>
+      _shopDataSourceRadius;
 
   @override
   Future<Result<List<ShopModel>>> fetchShops(
@@ -49,6 +59,7 @@ class ShopDataSourceImpl implements ShopDataSource {
     return shopResult.whenWithResult(
       (success) {
         _shopFirestore.shopFirestoreStreamController.stream.listen((event) {
+          _shopDataSourceRadius = _shopFirestore.shopFirestoreRadius;
           final shopModel = event.map((list) =>
               list.map((e) => ShopModel.fromJson(e.data()!)).toList());
 
@@ -59,5 +70,17 @@ class ShopDataSourceImpl implements ShopDataSource {
       },
       (e) => Error(Exception(e)),
     );
+  }
+
+  @override
+  Future<Result<String>> onChangeMapRadius({required double dx}) async {
+    final result = await _shopFirestore.onChangeMapRadius(dx: dx);
+
+    return result.whenWithResult((success) {
+      _shopDataSourceRadius.add(dx);
+      return Success('SUCCESS');
+    }, (e) {
+      return Error(Exception(e));
+    });
   }
 }

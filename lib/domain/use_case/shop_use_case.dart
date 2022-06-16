@@ -2,6 +2,7 @@ import 'package:foodie_kyoto/data/model/result.dart';
 import 'package:foodie_kyoto/domain/entity/shop.dart';
 import 'package:foodie_kyoto/domain/repository/shop_repository.dart';
 import 'dart:async';
+import 'package:rxdart/rxdart.dart';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -13,6 +14,7 @@ class ShopUseCase {
 
   final ShopRepository _repository;
   final shopUseCaseStreamController = StreamController<Stream<List<Shop>>>();
+  BehaviorSubject shopUseCaseRadius = BehaviorSubject<double>.seeded(1.0);
 
   Future<Result<List<Shop>>> fetchShops({required int limit, String? cursor}) =>
       _repository.fetchShops(limit: limit, cursor: cursor);
@@ -32,6 +34,9 @@ class ShopUseCase {
     return result.whenWithResult(
       (success) {
         _repository.shopRepositoryStreamController?.stream.listen((event) {
+          if (_repository.shopRepositoryRadius != null) {
+            shopUseCaseRadius = _repository.shopRepositoryRadius!;
+          }
           shopUseCaseStreamController.add(event);
         });
 
@@ -39,5 +44,16 @@ class ShopUseCase {
       },
       (e) => Error(Exception(e)),
     );
+  }
+
+  Future<Result<String>> onChangeMapRadius({required double dx}) async {
+    final result = await _repository.onChangeMapRadius(dx: dx);
+
+    return result.whenWithResult((success) {
+      shopUseCaseRadius.add(dx);
+      return Success('SUCCESS');
+    }, (e) {
+      return Error(Exception(e));
+    });
   }
 }

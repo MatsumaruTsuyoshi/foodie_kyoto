@@ -3,6 +3,7 @@ import 'package:foodie_kyoto/data/model/result.dart';
 import 'package:foodie_kyoto/domain/entity/shop.dart';
 import 'package:foodie_kyoto/domain/repository/shop_repository.dart';
 import 'dart:async';
+import 'package:rxdart/rxdart.dart';
 
 class ShopRepositoryImpl implements ShopRepository {
   ShopRepositoryImpl({required ShopDataSource dataSource})
@@ -20,6 +21,15 @@ class ShopRepositoryImpl implements ShopRepository {
           StreamController<Stream<List<Shop>>>?
               _shopRepositoryStreamController) =>
       _shopRepositoryStreamController;
+
+  @override
+  get shopRepositoryRadius => _shopRepositoryRadius;
+
+  BehaviorSubject _shopRepositoryRadius = BehaviorSubject<double>.seeded(1.0);
+
+  @override
+  set shopRepositoryRadius(BehaviorSubject? _shopRepositoryRadius) =>
+      _shopRepositoryRadius;
 
   @override
   Future<Result<List<Shop>>> fetchShops(
@@ -60,6 +70,9 @@ class ShopRepositoryImpl implements ShopRepository {
 
     return dataSourceResult.whenWithResult(
       (success) {
+        if (_dataSource.shopDataSourceRadius != null) {
+          _shopRepositoryRadius = _dataSource.shopDataSourceRadius!;
+        }
         _dataSource.shopDataSourceStreamController?.stream.listen((event) {
           final shopList = event.map((list) => list
               .map((e) => Shop(
@@ -82,5 +95,17 @@ class ShopRepositoryImpl implements ShopRepository {
       },
       (e) => Error(Exception(e)),
     );
+  }
+
+  @override
+  Future<Result<String>> onChangeMapRadius({required double dx}) async {
+    final result = await _dataSource.onChangeMapRadius(dx: dx);
+
+    return result.whenWithResult((success) {
+      _shopRepositoryRadius.add(dx);
+      return Success('SUCCESS');
+    }, (e) {
+      return Error(Exception(e));
+    });
   }
 }

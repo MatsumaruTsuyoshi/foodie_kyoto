@@ -18,6 +18,8 @@ class ShopFirestore {
   final shopFirestoreStreamController =
       StreamController<Stream<List<DocumentSnapshot<Map<String, Object?>>>>>();
 
+  BehaviorSubject shopFirestoreRadius = BehaviorSubject<double>.seeded(1.0);
+
   Future<Result<QuerySnapshot<Map<String, dynamic>>>> fetchShops(
       {required int limit, String? cursor}) async {
     final ref = _firestore.collection('shops');
@@ -53,7 +55,6 @@ class ShopFirestore {
       List<int>? serviceTags,
       List<int>? areaTags,
       List<int>? foodTags}) async {
-    final _radius = BehaviorSubject<double>.seeded(radius);
     final geo = Geoflutterfire();
     final center = geo.point(latitude: latitude, longitude: longitude);
     final ref = _firestore
@@ -64,15 +65,26 @@ class ShopFirestore {
         .where('area_tags', arrayContainsAny: areaTags)
         .where('food_tags', arrayContainsAny: foodTags);
 
+    shopFirestoreRadius = BehaviorSubject<dynamic>.seeded(radius);
+
     try {
-      // controllerでradius（マップ半径）をstateとしてキャッシュしておき、
-      // その値を引数に入れる。マップ移動したらradius.add(dx)とする。
-      final snapshot = _radius.switchMap((rad) {
+      // マップ移動したらonChangeMapRadiusが呼ばれ、shopFirestoreRadiusが変更される。
+      // shopFirestoreRadiusが変更されたらswitchMapが作動し検索半径が変更される。
+      final snapshot = shopFirestoreRadius.switchMap((rad) {
         return geo
             .collection(collectionRef: ref)
             .within(center: center, radius: rad, field: 'position');
       });
-      shopFirestoreStreamController.add(snapshot);
+      shopFirestoreStreamController.add(snapshot.cast());
+      return Success('SUCCESS');
+    } on Exception catch (e) {
+      return Error(e);
+    }
+  }
+
+  Future<Result<String>> onChangeMapRadius({required double dx}) async {
+    try {
+      shopFirestoreRadius.add(dx);
       return Success('SUCCESS');
     } on Exception catch (e) {
       return Error(e);
