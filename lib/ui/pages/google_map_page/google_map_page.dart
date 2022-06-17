@@ -6,8 +6,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 class GoogleMapPage extends HookConsumerWidget {
   const GoogleMapPage({Key? key}) : super(key: key);
 
-  static const CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng(37.42796133580664, -122.085749655962),
+  static const CameraPosition _kKyotoCity = CameraPosition(
+    target: LatLng(35.01, 135.78),
     zoom: 14.4746,
   );
 
@@ -24,18 +24,29 @@ class GoogleMapPage extends HookConsumerWidget {
     return Scaffold(
       body: GoogleMap(
         mapType: MapType.normal,
-        initialCameraPosition: _kGooglePlex,
-        onMapCreated: ref.read(googleMapProvider.notifier).onMapCreated,
+        initialCameraPosition: _kKyotoCity,
+        onMapCreated: (controller) {
+          ref.read(googleMapProvider.notifier).onMapCreated(controller);
+          Future(() async {
+            await ref.read(googleMapProvider.notifier).getCenterLocation();
+            await ref.read(googleMapProvider.notifier).getMapRadiusKiloMeter();
+          }).then((_) => ref.read(googleMapProvider.notifier).searchShop());
+        },
+        onCameraMove: (position) async {
+          await ref.read(googleMapProvider.notifier).onCameraMove(position);
+        },
       ),
       floatingActionButton: state.when(
-          (googleMapController) => FloatingActionButton.extended(
-                onPressed: () => ref
-                    .read(googleMapProvider.notifier)
-                    .goToTheLake(position: _kLake),
-                label: const Text('To the lake!'),
-                icon: const Icon(Icons.directions_boat),
-              ),
-          creating: () => const SizedBox()),
+        (googleMapController, __, ___, ____) => FloatingActionButton.extended(
+          onPressed: () => ref
+              .read(googleMapProvider.notifier)
+              .goToTheLake(position: _kLake),
+          label: const Text('To the lake!'),
+          icon: const Icon(Icons.directions_boat),
+        ),
+        creating: () => const SizedBox(),
+        error: () => const SizedBox(),
+      ),
     );
   }
 }
